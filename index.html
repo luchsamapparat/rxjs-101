@@ -10,9 +10,15 @@
 
 <body class="p-5">
   <section class="mb-5">
-    <h1 class="mb-4">Synchronous XHR Request</h1>
-    <button id="load-data-button" class="btn btn-primary" type="button">
-      🐌 Load Data
+    <h1 class="mb-4">Asynchronous XHR Request</h1>
+    <button id="load-data-callback-button" class="btn btn-primary me-1" type="button">
+      ☎️ Load Data via Callback
+    </button>
+    <button id="load-data-promise-button" class="btn btn-primary me-1" type="button">
+      🎁 Load Data via Promise
+    </button>
+    <button id="load-data-async-button" class="btn btn-primary" type="button">
+      🚏 Load Data via Async/Await
     </button>
 
     <p id="data" class="mt-4"></p>

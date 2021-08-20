@@ -1,17 +1,44 @@
-//#region Synchronous XHR Request
+//#region Asynchronous XHR Request
 
-function loadData() {
+function loadDataViaCallback(callback: (response: string) => void) {
     const request = new XMLHttpRequest();
-    request.open('GET', '/data.txt', false);
+    request.open('GET', '/data.txt', true);
     request.send(null);
-    return request.response;
+    request.onload = () => {
+        if (request.readyState === 4) {
+            callback(request.response)
+        }
+    };
 }
 
-const loadDataButton = document.querySelector<HTMLButtonElement>('#load-data-button')!;
+async function loadDataViaFetch() {
+    return (await window.fetch('/data.txt')).text();
+}
+
+const loadDataCallbackButton = document.querySelector<HTMLButtonElement>('#load-data-callback-button')!;
+const loadDataPromiseButton = document.querySelector<HTMLButtonElement>('#load-data-promise-button')!;
+const loadDataAsyncButton = document.querySelector<HTMLButtonElement>('#load-data-async-button')!;
 const dataContainer = document.querySelector<HTMLParagraphElement>('#data')!;
 
-loadDataButton.addEventListener('click', () => {
-    dataContainer.innerText = loadData()
+loadDataCallbackButton.addEventListener('click', () => {
+    dataContainer.innerText = '';
+    loadDataViaCallback(
+        data => dataContainer.innerText = data
+    );
+});
+
+loadDataPromiseButton.addEventListener('click', () => {
+    dataContainer.innerText = '';
+    loadDataViaFetch()
+        .then(
+            data => dataContainer.innerText = data
+        );
+});
+
+loadDataAsyncButton.addEventListener('click', async () => {
+    dataContainer.innerText = '';
+    const data = await loadDataViaFetch();
+    dataContainer.innerText = data;
 });
 
 //#endregion
