@@ -15,9 +15,7 @@ loadDataCallbackButton.addEventListener('click', () => {
 loadDataPromiseButton.addEventListener('click', () => {
     dataContainer.innerText = '';
     loadDataUsingFetch()
-        .then(
-            data => dataContainer.innerText = data
-        );
+        .then(data => dataContainer.innerText = data);
 });
 
 loadDataAsyncButton.addEventListener('click', async () => {
