@@ -1,18 +1,18 @@
 //#region Synchronous XHR Request
 
-function loadData() {
-    const request = new XMLHttpRequest();
-    request.open('GET', '/data.txt', false);
-    request.send(null);
-    return request.response;
-}
-
 const loadDataButton = document.querySelector<HTMLButtonElement>('#load-data-button')!;
 const dataContainer = document.querySelector<HTMLParagraphElement>('#data')!;
 
 loadDataButton.addEventListener('click', () => {
     dataContainer.innerText = loadData()
 });
+
+function loadData() {
+    const request = new XMLHttpRequest();
+    request.open('GET', '/data.txt', false);
+    request.send(null);
+    return request.response;
+}
 
 //#endregion
 
